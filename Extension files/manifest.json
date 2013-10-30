@@ -1,0 +1,32 @@
+{
+ "manifest_version": 2,
+ "name": "Sunlight Lookup",
+ "description": "Scans current page and returns more information about related government/political topics",
+ "version": "1.0",
+
+ "permissions": [
+    "contextMenus",
+    "background",
+    "storage",
+    // "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["pageReader.js"]
+    }
+  ],
+
+ "browser_action": {
+    "default_icon": "favicon.png",
+    "default_popup": "browser_action.html"
+  }
+}
