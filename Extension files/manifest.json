@@ -8,20 +8,20 @@
     "contextMenus",
     "background",
     "storage",
-    // "tabs",
+    "tabs",
     "http://*/*",
     "https://*/*"
   ],
 
   "background": {
     "persistent": false,
-    "scripts": ["background.js"]
+    "scripts": ["jquery.js", "underscore.js", "chromely.js", "background.js"]
   },
 
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["pageReader.js"]
+      "js": ["chromely.js", "pageReader.js"]
     }
   ],
 
