@@ -4,8 +4,10 @@ chromely.send('page-reader', document.body.innerText);
 
 chromely.send('hihi', []);
 
-chrome.runtime.onMessage.addListener('gimme', function(req, sender, sendResponse) {
-  sendResponse(document.body.innerText);
+chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
+  if (req.greeting === 'gimme') {
+    sendResponse({message: 'hi'});
+  }
 });
 
 // chrome.runtime.sendMessage({

@@ -4,15 +4,15 @@ angular.module('sunExt', [])
 
     $scope.getMatches = function() {
       $log.log('sending!');
-      // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      //   chrome.tabs.sendMessage(tabs[0].id, { greeting: 'gimme' }, function(response) {
-      //     $log.log(response);
-      //     // $scope.apply(function() {
-      //     //   console.log(response.matches);
-      //     //   $scope.matches = response.matches;
-      //     // });
-      //   });
-      // });
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { greeting: 'gimme' }, function(response) {
+          $log.log(response.message);
+          // $scope.apply(function() {
+          //   console.log(response.matches);
+          //   $scope.matches = response.matches;
+          // });
+        });
+      });
     };
 
 }]);
