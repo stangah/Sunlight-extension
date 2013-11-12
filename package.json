@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "~3.4.4",
     "request": "~2.27.0",
-    "csv": "~0.3.6"
+    "csv": "~0.3.6",
+    "bower": "~1.2.7"
   }
 }

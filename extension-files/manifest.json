@@ -15,13 +15,13 @@
 
   "background": {
     "persistent": false,
-    "scripts": ["jquery.js", "underscore.js", "chromely.js", "background.js"]
+    "scripts": ["./bower_components/underscore/underscore.js", "./bower_components/jquery/jquery.js", "background.js"]
   },
 
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["chromely.js", "pageReader.js"]
+      "js": ["pageReader.js"]
     }
   ],
 

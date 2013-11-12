@@ -21,18 +21,20 @@ module.exports.populate = function() {
   });
 };
 
-var glossaryURL = 'https://raw.github.com/unitedstates/glossary/gh-pages/definitions/congress/';
-
 var getDef = function(word) {
+  var glossaryURL = 'https://raw.github.com/unitedstates/glossary/gh-pages/definitions/congress/';
   request(glossaryURL + word, function(err, res, def) {
     def = JSON.parse(def);
     var newDef = {
-      name: word.split('.')[0],
+      name: word.split('.')[0].toLowerCase(),
       short_def: def.short_definition,
       long_def: def.long_definition_text,
       sourceURL: def.source_url
     };
     storage.glossary[newDef.name] = newDef;
-    storage.wordList[newDef.name] = 'glossary';
+    storage.wordList[newDef.name] = {
+      type: 'glossary',
+      id: newDef.name
+    };
   });
 };

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+  <head><title>Hello World!</title></head>
+  <link rel="stylesheet" type="text/css" href='/browser_action.css'>
+  <link rel="stylesheet" type="text/css" href='/bootstrap.css'>
+  <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet"> -->
+  <!-- <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"> -->
+  <body ng-app="sunExt" ng-csp="">
+
+    <div class="all">
+
+      <div ng-controller="TabsController">
+
+        <tabset>
+          <tab class="tab" heading="Search">
+            <div class="tabFill">
+              <img class="logo" src="./images/logo.png">
+              <input class="search" type="text" placeholder="Search for your query here!">
+            </div>
+          </tab>
+
+          <tab class="tab" heading="Bills ({{bills.size}})">
+            <div class="tabFill" bills-directive></div>
+          </tab>
+
+          <tab class="tab" heading="Glossary ({{glossary.size}})">
+            <div class="tabFill" glossary-directive></div>
+          </tab>
+
+          <tab class="tab" heading="Congressmen ({{congressmen.size}})">
+            <div class="tabFill" congressmen-directive></div>
+          </tab>
+
+        </tabset>
+      </div>
+
+
+    </div>
+
+  </body>
+  <script src="./bower_components/angular/angular.js"></script>
+  <script src="./ui-bootstrap-tpls-0.6.0.js"></script>
+  <script src="browser_action.js"></script>
+</html>

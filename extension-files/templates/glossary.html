@@ -1,0 +1,19 @@
+<accordion>
+  <accordion-group heading="{{match.name}}" ng-repeat="match in glossary.matches">
+    {{match.def.short_def}}
+  </accordion-group>
+</accordion>
+
+
+<!-- <div class="panel-group" ng-transclude>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" ng-click="isOpen = !isOpen" accordion-transclude="heading">lol.</a>
+      </h4>
+    </div>
+    <div class="panel-collapse" collapse="!isOpen">
+            <div class="panel-body" ng-transclude>Hello!</div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,40 @@
+.nav, .pagination, .carousel a {
+  cursor: pointer;
+}
+
+body {
+  width: 400px;
+  height: 450px;
+  background-image: url('images/bg.jpg');
+  color: rgb(98,95,92);
+  padding: 0;
+}
+
+.tab > a {
+  font-size: 0.8em;
+}
+
+.logo {
+  float: left;
+  width: 200px;
+  margin-left: 90px;
+  margin-top: 80px;
+}
+
+.search {
+  width: 300px;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.tabFill {
+  background-color: white;
+  width: 400px;
+  height: 410px;
+}
+
+.tab {
+  width: 100px;
+  text-align: center;
+}
+

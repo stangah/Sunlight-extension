@@ -2,6 +2,9 @@
 .AppleDouble
 .LSOverride
 Icon
+node_modules/*
+scratch/*
+extension-files/bower_components/*
 
 
 # Thumbnails
