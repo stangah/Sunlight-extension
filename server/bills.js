@@ -2,11 +2,14 @@ var request = require('request');
 var config = require('./config.json');
 var storage = require('./storage.js');
 
-module.exports.retrieve = function(id) {
+module.exports.retrieve = function(id, superRes) {
   var url = "http://congress.api.sunlightfoundation.com/bills?apikey=" + config.SUNLIGHT_API;
   request(url + '&bill_id=' + id, function(err, res, body) {
     if (!err && res.statusCode == 200) {
-      console.log(body);
+      var responseData = JSON.parse(body).results[0];
+      // console.log(JSON.parse(body).results);
+      superRes.send(JSON.stringify(responseData));
+      console.log(responseData);
     }
   });
 };

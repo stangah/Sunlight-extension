@@ -37,7 +37,7 @@ var arrayToObj = function(array, keyCol) {
     storage.nicknames[array[i][keyCol]].push(tempObj);
     storage.wordList[array[i][keyCol]] = {
       type: 'bills',
-      id: array[i][keyCol]
+      id: tempObj.bill_id
     };
   }
   return result;

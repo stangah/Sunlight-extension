@@ -22,20 +22,14 @@ module.exports.populate = function() {
   });
 };
 
-module.exports.retrieveByID = function(id) {
+module.exports.retrieveByID = function(id, superRes) {
   console.log(id);
   request(url + '&bioguide_id=' + id, function(err, res, body) {
     if (!err && res.statusCode == 200) {
       // console.log(body);
       var results = JSON.parse(body).results;
-      console.log(results);
-      // for (var i = 0; i < results.length; i++) {
-      //   storage.congressmen[ results[i].first_name + ' ' + results[i].last_name ] = results[i];
-      //   storage.wordList[ results[i].first_name + ' ' + results[i].last_name ] = {
-      //     type: 'congressmen',
-      //     id: results[i].bioguide_id
-      //   };
-      // }
+      superRes.send(results[0]);
+      // console.log(results[0])
     }
   });
 };

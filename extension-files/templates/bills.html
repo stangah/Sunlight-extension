@@ -1,5 +1,13 @@
 <accordion close-others="true">
-  <accordion-group heading="{{def}}" ng-repeat="def in bills.matches">
-      {{def.content}}
+  <accordion-group heading="{{match.short_title}}" ng-repeat="match in bills.matches">
+      <div>Bill ID: <a href="{{match.last_version.urls.pdf}}">{{match.bill_id}}</a></div>
+      {{match.official_title}}
+
+      <div>
+        <span>Find out more:</span>
+        <a href="{{match.urls.congress}}" target="_blank">congress.gov</a> |
+        <a href="{{match.urls.govtrack}}" target="_blank">GovTrack.us</a> |
+        <a href="{{match.urls.opencongress}}" target="_blank">opencongress.org</a>
+      </div>
   </accordion-group>
 </accordion>

@@ -1,4 +1,5 @@
 var express = require('express');
+var fs = require('fs');
 var config = require('./server/config.json');
 var nicknames = require('./server/nicknames.js');
 var glossary = require('./server/glossary.js');
@@ -10,7 +11,7 @@ var congressmen = require('./server/congressmen.js');
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
-};
+}
 
 var app = express();
 
@@ -49,9 +50,9 @@ app.get('/list', function(req, res){
   res.send(JSON.stringify(storage.wordList));
 });
 
-app.get('/bills/:nickname', function(req, res){
-  var nickname = req.params.nickname;
-  res.send(JSON.stringify(storage.bills[nickname]));
+app.get('/bills/:id', function(req, res){
+  var id = req.params.id;
+  bills.retrieve(id, res);
 });
 
 app.get('/glossary/:word', function(req, res){
@@ -60,11 +61,18 @@ app.get('/glossary/:word', function(req, res){
     name: word,
     def: storage.glossary[word]
   }));
+  console.log(storage.glossary[word]);
 });
 
 app.get('/congressmen/:id', function(req, res){
   var id = req.params.id;
-  res.send( JSON.stringify(congressmen.retrieveByID(id)) );
+  congressmen.retrieveByID(id, res);
+});
+
+app.get('/congressmen/img/:id', function(req, res){
+  console.log("Serving picture!");
+  var id = req.params.id;
+  res.send(fs.readFileSync(__dirname+'/server/assets/pics/' + id + ".jpg"));
 });
 
 app.listen(8080);

@@ -3,8 +3,8 @@
 }
 
 body {
-  width: 400px;
-  height: 450px;
+  width: 450px;
+  height: 350px;
   background-image: url('images/bg.jpg');
   color: rgb(98,95,92);
   padding: 0;
@@ -29,12 +29,12 @@ body {
 
 .tabFill {
   background-color: white;
-  width: 400px;
-  height: 410px;
+  width: 450px;
+  height: 310px;
 }
 
 .tab {
-  width: 100px;
+  width: 112px;
   text-align: center;
 }
 
