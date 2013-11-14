@@ -19,6 +19,12 @@
   background-image: url('../images/cream_dust.png');
 }
 
+.infoList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 .lineBreak {
   margin: 10px 20px 20px 20px;
   border-color: #DDD;
@@ -40,10 +46,12 @@ body {
 
 .mugshot {
   width: 100px;
+  float: left;
 }
 
 .tab > a {
-  font-size: 0.8em;
+  font-size: 0.9em;
+  font-family: Arial, Helvetica, Sans-serif;
   margin-top: 5px;
 }
 
@@ -68,7 +76,7 @@ body {
 }
 
 .tab {
-  width: 112px;
+  width: 150px;
   text-align: center;
 }
 

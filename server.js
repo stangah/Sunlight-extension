@@ -20,11 +20,6 @@ storage.glossary = JSON.parse(localStorage.getItem('glossary')) || {};
 storage.nicknames = JSON.parse(localStorage.getItem('nicknames')) || {};
 storage.congressmen = JSON.parse(localStorage.getItem('congressmen')) || {};
 
-// Proper case-ness
-String.prototype.toProperCase = function () {
-    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-};
-
 app.get('/', function(req, res){
   res.send('hello world');
 });
@@ -64,7 +59,7 @@ app.get('/bills/:id', function(req, res){
 app.get('/glossary/:word', function(req, res){
   var word = req.params.word.toLowerCase();
   res.send(JSON.stringify({
-    name: word.toProperCase(),
+    name: word,
     def: storage.glossary[word]
   }));
   // console.log(storage.glossary[word]);

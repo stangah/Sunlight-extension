@@ -1,3 +1,10 @@
+// Proper case-ness
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
+
+
+// Angular goodness
 angular.module('sunExt', ['ui.bootstrap'])
 .config(['$compileProvider', '$routeProvider', '$locationProvider', function($compileProvider, $routeProvider, $locationProvider) {
 
@@ -64,6 +71,19 @@ angular.module('sunExt', ['ui.bootstrap'])
 
     $scope.addStuff = function(key, type, data) {
       $scope[type].size++;
+
+      //Data adjustments
+      switch (type) {
+        case 'glossary':
+          data.name = data.name.toProperCase();
+          break;
+        case 'congressmen':
+          if (data.state_rank) { data.state_rank = data.state_rank.toProperCase(); }
+          break;
+        case 'bills':
+          break;
+      }
+
       $scope[type].matches[key] = data;
       // console.log(type, data);
     };
