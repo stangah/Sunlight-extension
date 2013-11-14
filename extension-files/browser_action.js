@@ -86,6 +86,12 @@ angular.module('sunExt', ['ui.bootstrap'])
     $scope.getMatches();
 
 }])
+// .directive('searchDirective', function() {
+//   return {
+//     restrict: "EAC",
+//     templateUrl: "templates/search.html"
+//   };
+// })
 .directive('glossaryDirective', function() {
   return {
     restrict: "EAC",

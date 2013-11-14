@@ -1,19 +1,13 @@
+<h5 class="accHeader">Matching Key Terms</h5>
+<hr class="lineBreak">
+
 <accordion>
-  <accordion-group heading="{{match.name}}" ng-repeat="match in glossary.matches">
+  <accordion-group ng-repeat="match in glossary.matches" is-open="section1.isOpen">
+    <accordion-heading>
+      <i ng-class="{true : 'icon-chevron-down', false : 'icon-chevron-right'}[!!section1.isOpen]"></i>
+      {{match.name}}
+    </accordion-heading>
     {{match.def.short_def}}
+    <div class="source" ng-show="match.def.sourceURL">Source: <a href="{{match.def.sourceURL}}">{{match.def.sourceURL}}</a></div>
   </accordion-group>
 </accordion>
-
-
-<!-- <div class="panel-group" ng-transclude>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" ng-click="isOpen = !isOpen" accordion-transclude="heading">lol.</a>
-      </h4>
-    </div>
-    <div class="panel-collapse" collapse="!isOpen">
-            <div class="panel-body" ng-transclude>Hello!</div>
-    </div>
-  </div>
-</div> -->

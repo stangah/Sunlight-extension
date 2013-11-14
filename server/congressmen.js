@@ -29,7 +29,7 @@ module.exports.retrieveByID = function(id, superRes) {
       // console.log(body);
       var results = JSON.parse(body).results;
       superRes.send(results[0]);
-      // console.log(results[0])
+      console.log(results[0])
     }
   });
 };

@@ -1,0 +1,74 @@
+.nav, .pagination, .carousel a {
+  cursor: pointer;
+}
+
+.accordion {
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.accHeader {
+  text-align: center;
+  margin: 0;
+  padding-top: 10px;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.active > a{
+  background-image: url('../images/cream_dust.png');
+}
+
+.lineBreak {
+  margin: 10px 20px 20px 20px;
+  border-color: #DDD;
+  color: blue;
+}
+
+body {
+  width: 450px;
+  height: 350px;
+  background-image: url('../images/bg.jpg');
+  color: rgb(98,95,92);
+  padding: 0;
+}
+
+.source {
+  font-size: .8em;
+  margin-top: 5px;
+}
+
+.mugshot {
+  width: 100px;
+}
+
+.tab > a {
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+.logo {
+  float: left;
+  width: 200px;
+  margin-left: 90px;
+  margin-top: 80px;
+}
+
+.search {
+  width: 300px;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.tabFill {
+  /*background-color: white;*/
+  background-image: url('../images/cream_dust.png');
+  width: 450px;
+  height: 350px;
+}
+
+.tab {
+  width: 112px;
+  text-align: center;
+}
+

@@ -1,6 +1,13 @@
+<h5 class="accHeader">Matching Currently Serving Congressmen</h5>
+<hr class="lineBreak">
+
 <accordion>
-  <accordion-group heading="{{match.first_name}} {{match.last_name}}" ng-repeat="match in congressmen.matches">
-    <img src="http://localhost:8080/congressmen/img/{{match.bioguide_id}}">
+  <accordion-group ng-repeat="match in congressmen.matches" is-open="section1.isOpen">
+    <accordion-heading>
+      <i ng-class="{true : 'icon-chevron-down', false : 'icon-chevron-right'}[!!section1.isOpen]"></i>
+      {{match.first_name}} {{match.last_name}}
+    </accordion-heading>
+    <img class="mugshot img-rounded" src="http://localhost:8080/congressmen/img/{{match.bioguide_id}}">
     {{match}}
   </accordion-group>
 </accordion>

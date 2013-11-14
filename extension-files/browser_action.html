@@ -2,8 +2,10 @@
 
 <html>
   <head><title>Hello World!</title></head>
-  <link rel="stylesheet" type="text/css" href='/browser_action.css'>
-  <link rel="stylesheet" type="text/css" href='/bootstrap.css'>
+  <link rel="stylesheet" type="text/css" href='css/browser_action.css'>
+  <link rel="stylesheet" type="text/css" href='bootstrap/css/bootstrap.edited.css'>
+  <script src="bower_components/jquery/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
   <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet"> -->
   <!-- <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"> -->
   <body ng-app="sunExt" ng-csp="">
@@ -14,10 +16,7 @@
 
         <tabset>
           <tab class="tab" heading="Search">
-            <div class="tabFill">
-              <img class="logo" src="./images/logo.png">
-              <input class="search" type="text" placeholder="Search for your query here!">
-            </div>
+            <div class="tabFill" search-directive></div>
           </tab>
 
           <tab class="tab" heading="Bills ({{bills.size}})">
@@ -39,7 +38,7 @@
     </div>
 
   </body>
-  <script src="./bower_components/angular/angular.js"></script>
-  <script src="./ui-bootstrap-tpls-0.6.0.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="ui-bootstrap-tpls-0.6.0.js"></script>
   <script src="browser_action.js"></script>
 </html>
