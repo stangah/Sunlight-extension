@@ -1,11 +1,12 @@
-var express = require('express');
-var fs = require('fs');
-var config = require('./server/config.json');
-var nicknames = require('./server/nicknames.js');
-var glossary = require('./server/glossary.js');
-var storage = require('./server/storage.js');
-var bills = require('./server/bills.js');
-var congressmen = require('./server/congressmen.js');
+var express = require('express'),
+    fs = require('fs'),
+    config = require('./server/config.json'),
+    nicknames = require('./server/nicknames.js'),
+    glossary = require('./server/glossary.js'),
+    storage = require('./server/storage.js'),
+    bills = require('./server/bills.js'),
+    congressmen = require('./server/congressmen.js'),
+    app = express();
 
 // Initialize node-localstorage
 if (typeof localStorage === "undefined" || localStorage === null) {
@@ -13,36 +14,41 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   localStorage = new LocalStorage('./scratch');
 }
 
-var app = express();
+// Initialize from localStorage if available
+storage.wordList = JSON.parse(localStorage.getItem('wordList')) || {};
+storage.glossary = JSON.parse(localStorage.getItem('glossary')) || {};
+storage.nicknames = JSON.parse(localStorage.getItem('nicknames')) || {};
+storage.congressmen = JSON.parse(localStorage.getItem('congressmen')) || {};
+
+// Proper case-ness
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
 
 app.get('/', function(req, res){
   res.send('hello world');
 });
 
-// nicknames.populate();
-// glossary.populate();
-// congressmen.populate();
+// app.get('/test', function(req, res) {
+//   bills.retrieve(req.params.id);
+//   congressmen.populate();
+// });
 
-storage.wordList = JSON.parse(localStorage.getItem('wordList'));
-storage.glossary = JSON.parse(localStorage.getItem('glossary'));
-storage.nicknames = JSON.parse(localStorage.getItem('nicknames'));
-storage.congressmen = JSON.parse(localStorage.getItem('congressmen'));
-
-app.get('/test', function(req, res) {
-  // bills.retrieve(req.params.id);
-  congressmen.populate();
-});
-
+//Manual refresh of list
 app.get('/refresh', function(req, res){
   nicknames.populate();
   glossary.populate();
   congressmen.populate();
+
+  // Ugly, but it works
   setTimeout(function() {
     localStorage.setItem('wordList', JSON.stringify(storage.wordList));
     localStorage.setItem('glossary', JSON.stringify(storage.glossary));
     localStorage.setItem('nicknames', JSON.stringify(storage.nicknames));
     localStorage.setItem('congressmen', JSON.stringify(storage.congressmen));
-  }, 5000);
+    console.log('saved');
+  }, 7000);
+
   res.send();
 });
 
@@ -58,10 +64,10 @@ app.get('/bills/:id', function(req, res){
 app.get('/glossary/:word', function(req, res){
   var word = req.params.word.toLowerCase();
   res.send(JSON.stringify({
-    name: word,
+    name: word.toProperCase(),
     def: storage.glossary[word]
   }));
-  console.log(storage.glossary[word]);
+  // console.log(storage.glossary[word]);
 });
 
 app.get('/congressmen/:id', function(req, res){
@@ -70,8 +76,8 @@ app.get('/congressmen/:id', function(req, res){
 });
 
 app.get('/congressmen/img/:id', function(req, res){
-  console.log("Serving picture!");
   var id = req.params.id;
+  // console.log("Serving picture!");
   res.send(fs.readFileSync(__dirname+'/server/assets/pics/' + id + ".jpg"));
 });
 

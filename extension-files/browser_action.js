@@ -1,27 +1,10 @@
 angular.module('sunExt', ['ui.bootstrap'])
 .config(['$compileProvider', '$routeProvider', '$locationProvider', function($compileProvider, $routeProvider, $locationProvider) {
 
-  // $routeProvider
-  //   .when('/', {
-  //     controller: 'ListController',
-  //     templateUrl: 'templates/home.html'
-  //   })
-  //   .when('/words', {
-
-  //   })
-  //   .when('/bills', {
-
-  //   })
-  //   .when('/congressmen', {
-
-  //   })
-  //   .otherwise({
-  //     redirectTo: '/'
-  //   });
-
-  //Some chrome extension bullshit
+  //Some chrome extension poppycock
   $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
 
+  // I forget what this does but I'll assume it's important
   $locationProvider.html5Mode(false);
 
 }])
@@ -41,11 +24,20 @@ angular.module('sunExt', ['ui.bootstrap'])
       matches: {}
     };
 
+    // Kicks off the whole process by requesting text from the DOM
+    $scope.getMatches = function() {
+      $log.log('querying!');
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { greeting: 'gimme' });
+      });
+    };
+
+    // Listens for matches from background.js
     chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
       if (req.method === 'bg.matches') {
         $log.log('received!');
         $scope.matches = req.data;
-        console.log(req.data);
+        // console.log(req.data);
         $scope.populate();
       }
     });
@@ -66,21 +58,14 @@ angular.module('sunExt', ['ui.bootstrap'])
       }).success(function(data, status, headers, config) {
         $scope.addStuff(key, matches[key].type, data);
       }).error(function(data, status, headers, config) {
-        console.log("lol. error.");
+        console.log("lol, error.");
       });
     };
 
     $scope.addStuff = function(key, type, data) {
       $scope[type].size++;
       $scope[type].matches[key] = data;
-      console.log(type, data);
-    };
-
-    $scope.getMatches = function() {
-      $log.log('querying!');
-      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { greeting: 'gimme' });
-      });
+      // console.log(type, data);
     };
 
     $scope.getMatches();

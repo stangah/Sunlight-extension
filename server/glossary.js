@@ -1,6 +1,6 @@
-var request = require('request');
-var config = require('./config.json');
-var storage = require('./storage.js');
+var request = require('request'),
+    config = require('./config.json'),
+    storage = require('./storage.js');
 
 
 module.exports.populate = function() {
@@ -11,7 +11,7 @@ module.exports.populate = function() {
       for (var i = 0; i < body.length; i++) {
         words.push(body[i].name);
       }
-      console.log(words);
+      // console.log(words);
 
       for (i = 0; i < words.length; i++) {
         getDef(words[i]);
@@ -23,18 +23,23 @@ module.exports.populate = function() {
 
 var getDef = function(word) {
   var glossaryURL = 'https://raw.github.com/unitedstates/glossary/gh-pages/definitions/congress/';
+
   request(glossaryURL + word, function(err, res, def) {
+    var newDef;
     def = JSON.parse(def);
-    var newDef = {
+    newDef = {
       name: word.split('.')[0].toLowerCase(),
       short_def: def.short_definition,
       long_def: def.long_definition_text,
       sourceURL: def.source_url
     };
+
+    // Save in glossary storage and wordList
     storage.glossary[newDef.name] = newDef;
     storage.wordList[newDef.name] = {
       type: 'glossary',
       id: newDef.name
     };
+
   });
 };

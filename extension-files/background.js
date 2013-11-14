@@ -1,10 +1,10 @@
 var background = {};
 
-background.updateWordList = function() {
+background._updateWordList = function() {
   console.log('grabbing word list');
   $.get("http://localhost:8080/list", function(data) {
     data = JSON.parse(data);
-    console.log(data);
+    // console.log(data);
     dataLowerCase = {};
     for(var key in data) {
       dataLowerCase[key.toLowerCase()] = data[key];
@@ -22,7 +22,7 @@ background._addListeners = function() {
     switch(req.method) {
 
       case 'page.sendText':
-      console.log('matching!');
+      // console.log('matching!');
         background.matchNSend(req.data);
         break;
 
@@ -32,31 +32,34 @@ background._addListeners = function() {
 
 
 background.matchNSend = function(string) {
-  // chrome.storage.sync.get('list', function(data) {
-    // var list = JSON.parse(data.list);
-    // var list = window.list;
-    console.log(list);
-    var patternString = '';
-    for (var key in list) {
-      if (patternString === '') {
-        patternString += key;
-      } else {
-        patternString += '|' + key;
-      }
+  var patternString = '',
+      pattern,
+      matchNames,
+      matches = {};
+  // console.log(list);
+
+  //Format regex string with | between terms
+  for (var key in list) {
+    if (patternString === '') {
+      patternString += key;
+    } else {
+      patternString += '|' + key;
     }
-    var pattern = new RegExp(patternString, 'gi');
-    var matchNames = _.uniq(string.match(pattern), false, function(item) {
-      return item.toLowerCase();
-    });
-    var matches = {};
-    for (var i = 0; i < matchNames.length; i++) {
-      matches[matchNames[i]] = list[matchNames[i].toLowerCase()];
-    }
-    console.log(matches);
-    // console.log(matchNames);
-    // console.log(patternString);
-    background.sendMatches(matches);
-  // });
+  }
+
+  //Search for matches and store unique entries
+  pattern = new RegExp(patternString, 'gi');
+  matchNames = _.uniq(string.match(pattern), false, function(item) {
+    return item.toLowerCase();
+  });
+
+  // Change all keys to be lowercase for simplified lookup
+  for (var i = 0; i < matchNames.length; i++) {
+    matches[matchNames[i]] = list[matchNames[i].toLowerCase()];
+  }
+
+  // console.log(matches);
+  background.sendMatches(matches);
 };
 
 
@@ -71,8 +74,7 @@ background.sendMatches = function(matches) {
 
 background.initialize = function() {
   background._addListeners();
-  background.updateWordList();
-
+  background._updateWordList();
 };
 
 background.initialize();

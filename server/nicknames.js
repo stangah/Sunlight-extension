@@ -1,7 +1,7 @@
-var request = require('request');
-var csv = require('csv');
-var storage = require('./storage.js');
-var config = require('./config.json');
+var request = require('request'),
+    csv = require('csv'),
+    storage = require('./storage.js'),
+    config = require('./config.json');
 
 
 module.exports.populate = function() {
@@ -16,23 +16,24 @@ var csvParse = function(csvIn) {
   csv()
   .from.string(csvIn)
   .to.array(function(data) {
-    console.log(data);
-    console.log(arrayToObj(data, 3));
+    // console.log(data);
+    // console.log(arrayToObj(data, 3));
+    arrayToObj(data, 3);
   });
 };
 
 var arrayToObj = function(array, keyCol) {
-  var result = {};
+  var result = {},
+      tempObj = { type: 'bill' };
+
   for (var i = 1; i < array.length; i++) {
     result[array[i][keyCol]] = result[array[i][keyCol]] || [];
     storage.nicknames[array[i][keyCol]] = storage.nicknames[array[i][keyCol]] || [];
-    var tempObj = {
-      type: 'bill'
-    };
+
     for (var j = 0; j < array[i].length; j++) {
       tempObj[array[0][j]] = array[i][j];
     }
-    tempObj.bill_id = tempObj.bill_type + tempObj.bill_number + '-' + tempObj.congress;
+    tempObj.bill_id = tempObj.bill_type + tempObj.bill_number + '-' + tempObj.congress; // hr3590-111
     result[array[i][keyCol]].push(tempObj);
     storage.nicknames[array[i][keyCol]].push(tempObj);
     storage.wordList[array[i][keyCol]] = {

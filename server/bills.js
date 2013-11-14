@@ -1,6 +1,6 @@
-var request = require('request');
-var config = require('./config.json');
-var storage = require('./storage.js');
+var request = require('request'),
+    config = require('./config.json'),
+    storage = require('./storage.js');
 
 module.exports.retrieve = function(id, superRes) {
   var url = "http://congress.api.sunlightfoundation.com/bills?apikey=" + config.SUNLIGHT_API;
@@ -9,7 +9,7 @@ module.exports.retrieve = function(id, superRes) {
       var responseData = JSON.parse(body).results[0];
       // console.log(JSON.parse(body).results);
       superRes.send(JSON.stringify(responseData));
-      console.log(responseData);
+      // console.log(responseData);
     }
   });
 };
