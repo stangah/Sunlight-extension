@@ -6,7 +6,7 @@ A Chrome extension using APIs from [Sunlight Foundation](http://sunlightfoundati
 
 ### Through the Chrome Extension Store
 
-Head over to the hosted extension [here](http://lolImBroken) and follow the install instructions. 
+Head over to the hosted extension [at this broken link](http://lolImBroken) and follow the install instructions. 
 
 ### From Github
 
@@ -16,8 +16,12 @@ Clone the repo to a local folder and load the contents of the *extension-files* 
 
 Click on the extension icon in your browser action bar to scan the page and request info from the server. Results will be organized into the provided tabs. Click on each line to access more info.
 
+## Contribute
+
+You should like totally contribute to this repo and stuff.
+
 ## License
 
-Sunlight-extension is distributed 
+Sunlight-extension is distributed under the [license that I haven't decided on yet](http://lolNoLicenseYet).
 
 
