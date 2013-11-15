@@ -4,10 +4,12 @@
 
 <accordion close-others="true">
   <accordion-group ng-repeat="match in bills.matches" is-open="section1.isOpen">
+
       <accordion-heading>
         <i ng-class="{true : 'icon-chevron-down', false : 'icon-chevron-right'}[!!section1.isOpen]"></i>
         {{match.short_title}}
       </accordion-heading>
+
       <div>Read the full text: <a href="{{match.last_version.urls.pdf}}">{{match.bill_id}}</a></div>
       {{match.official_title}}
 
@@ -17,5 +19,6 @@
         <a href="{{match.urls.govtrack}}" target="_blank">GovTrack.us</a> |
         <a href="{{match.urls.opencongress}}" target="_blank">opencongress.org</a>
       </div>
+      
   </accordion-group>
 </accordion>

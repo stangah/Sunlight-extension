@@ -2,6 +2,14 @@
   cursor: pointer;
 }
 
+body {
+  width: 450px;
+  height: 300px;
+  background-image: url('../images/bg.jpg');
+  color: rgb(98,95,92);
+  padding: 0;
+}
+
 .accordion {
   padding-top: 0px;
   padding-left: 10px;
@@ -29,14 +37,6 @@
   margin: 10px 20px 20px 20px;
   border-color: #DDD;
   color: blue;
-}
-
-body {
-  width: 450px;
-  height: 350px;
-  background-image: url('../images/bg.jpg');
-  color: rgb(98,95,92);
-  padding: 0;
 }
 
 .source {
@@ -68,15 +68,13 @@ body {
   margin-top: 50px;
 }
 
-.tabFill {
-  /*background-color: white;*/
-  background-image: url('../images/cream_dust.png');
-  width: 450px;
-  height: 350px;
-}
-
 .tab {
   width: 150px;
   text-align: center;
 }
 
+.tabFill {
+  background-image: url('../images/cream_dust.png');
+  width: 450px;
+  height: 300px;
+}

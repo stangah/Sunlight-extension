@@ -3,11 +3,14 @@
 
 <accordion>
   <accordion-group ng-repeat="match in glossary.matches" is-open="section1.isOpen">
+
     <accordion-heading>
       <i ng-class="{true : 'icon-chevron-down', false : 'icon-chevron-right'}[!!section1.isOpen]"></i>
       {{match.name}}
     </accordion-heading>
-    {{match.def.short_def}}
+
+    <p>{{match.def.short_def}}</p>
     <div class="source" ng-show="match.def.sourceURL">Source: <a href="{{match.def.sourceURL}}">{{match.def.sourceURL}}</a></div>
+
   </accordion-group>
 </accordion>
