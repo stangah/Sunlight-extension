@@ -5,7 +5,8 @@
 body {
   width: 400px;
   height: 300px;
-  background-image: url('../images/bg.jpg');
+  /*background-image: url('../images/bg.jpg');*/
+  background-image: url('../images/cream_dust.png');
   color: rgb(98,95,92);
   font-family: Verdana, Geneva, sans-serif;
   padding: 0;
@@ -25,6 +26,11 @@ body {
 
 .active > a{
   background-image: url('../images/cream_dust.png');
+}
+
+ul.nav-tabs {
+  /*background-image: url('../images/bg.jpg');*/
+  background-color: #EEE
 }
 
 .btn-congress {
@@ -49,10 +55,11 @@ a.btn-full-text {
   font-size: 0.9em;
 }
 
-.infoList {
+ul.infoList {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  width: 200px;
 }
 
 .lineBreak {
@@ -86,7 +93,6 @@ a.btn-full-text {
 }
 
 .tabFill {
-  background-image: url('../images/cream_dust.png');
   width: 400px;
   height: 300px;
 }
