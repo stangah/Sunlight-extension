@@ -81,6 +81,7 @@ angular.module('sunExt', ['ui.bootstrap'])
           if (data.state_rank) { data.state_rank = data.state_rank.toProperCase(); }
           break;
         case 'bills':
+          data.bill_id = data.bill_id.toUpperCase();
           break;
       }
 

@@ -1,4 +1,4 @@
-<h5 class="accHeader">Matching Currently Serving Congressmen</h5>
+<h5 class="accHeader">Matching Congressmen</h5>
 <hr class="lineBreak">
 
 <accordion>
@@ -11,17 +11,16 @@
 
     <img class="mugshot img-rounded" src="http://localhost:8080/congressmen/img/{{match.bioguide_id}}">
 
-    <p>{{match.state_rank}} {{match.chamber == 'senate' && "Senator" || "Representative"}} {{match.first_name}} {{match.last_name}}</p>
+    <span class="name-congress">{{match.state_rank}} {{match.chamber == 'senate' && "Senator" || "Representative"}} {{match.first_name}} {{match.last_name}}</span>
     <ul class="infoList">
       <li>State: {{match.state_name}}</li>
       <li ng-show="match.chamber != 'senate'">District: {{match.district}}</li>
       <li></li>
     </ul>
 
-    <a href="{{match.website}}" target="_blank" class="btn btn-info btn-mini"><i class="icon-globe"></i> | Official Site</a>
-    <a href="http://www.facebook.com/profile.php?id={{match.facebook_id}}" target="_blank" class="btn btn-facebook btn-mini"><i class="icon-facebook"></i> | Facebook</a>
-    <a href="http://www.twitter.com/{{match.twitter_id}}" target="_blank" class="btn btn-twitter btn-mini"><i class="icon-twitter"></i> | Twitter</a>
-    {{match}}
-    
+    <a href="{{match.website}}" target="_blank" class="btn btn-info btn-mini btn-congress"><i class="icon-globe"></i> | Official Site</a>
+    <a href="http://www.facebook.com/profile.php?id={{match.facebook_id}}" target="_blank" class="btn btn-facebook btn-mini btn-congress"><i class="icon-facebook"></i> | Facebook</a>
+    <a href="http://www.twitter.com/{{match.twitter_id}}" target="_blank" class="btn btn-twitter btn-mini btn-congress"><i class="icon-twitter"></i> | Twitter</a>
+
   </accordion-group>
 </accordion>

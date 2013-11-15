@@ -3,10 +3,11 @@
 }
 
 body {
-  width: 450px;
+  width: 400px;
   height: 300px;
   background-image: url('../images/bg.jpg');
   color: rgb(98,95,92);
+  font-family: Verdana, Geneva, sans-serif;
   padding: 0;
 }
 
@@ -20,11 +21,32 @@ body {
   text-align: center;
   margin: 0;
   padding-top: 10px;
-  font-family: Verdana, Geneva, sans-serif;
 }
 
 .active > a{
   background-image: url('../images/cream_dust.png');
+}
+
+.btn-congress {
+  margin-top: 5px;
+}
+
+a.btn-full-text {
+  margin-bottom: 5px;
+}
+
+.italic {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.name-congress {
+  font-weight: bold;
+}
+
+.greyed {
+  color: #CCC;
+  font-size: 0.9em;
 }
 
 .infoList {
@@ -45,36 +67,26 @@ body {
 }
 
 .mugshot {
-  width: 100px;
+  width: 75px;
   float: left;
+  margin-right: 15px;
 }
 
 .tab > a {
-  font-size: 0.9em;
+  font-size: 0.7em;
   font-family: Arial, Helvetica, Sans-serif;
   margin-top: 5px;
 }
 
-.logo {
-  float: left;
-  width: 200px;
-  margin-left: 90px;
-  margin-top: 80px;
-}
-
-.search {
-  width: 300px;
-  margin-left: 50px;
-  margin-top: 50px;
-}
-
 .tab {
-  width: 150px;
+  width: 110px;
   text-align: center;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .tabFill {
   background-image: url('../images/cream_dust.png');
-  width: 450px;
+  width: 400px;
   height: 300px;
 }
