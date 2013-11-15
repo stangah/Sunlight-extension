@@ -3,6 +3,7 @@ var request = require('request'),
     storage = require('./storage.js');
 
 
+// Grabs word list and sends words to getDef for definitions
 module.exports.populate = function() {
   var words = [];
   request('https://api.github.com/repos/unitedstates/glossary/contents/definitions/congress?ref=gh-pages&access_token=' + config.GITHUB_API, function(err, res, body) {
@@ -21,6 +22,7 @@ module.exports.populate = function() {
   });
 };
 
+// Retrieves JSON definition data from the repo
 var getDef = function(word) {
   var glossaryURL = 'https://raw.github.com/unitedstates/glossary/gh-pages/definitions/congress/';
 

@@ -4,6 +4,7 @@ var request = require('request'),
     config = require('./config.json');
 
 
+// Populate word list with terms to search for
 module.exports.populate = function() {
   request('https://raw.github.com/unitedstates/bill-nicknames/master/bill-nicknames.csv?access_token=' + config.GITHUB_API, function(err, res, body) {
     if (!err && res.statusCode == 200) {
@@ -12,6 +13,7 @@ module.exports.populate = function() {
   });
 };
 
+// Info on Github is a CSV, sadly
 var csvParse = function(csvIn) {
   csv()
   .from.string(csvIn)
@@ -22,6 +24,7 @@ var csvParse = function(csvIn) {
   });
 };
 
+// Turns the array output from CSV into an object
 var arrayToObj = function(array, keyCol) {
   var result = {},
       tempObj = { type: 'bill' };

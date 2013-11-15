@@ -1,3 +1,5 @@
+// Convenient storage between modules
+
 module.exports.wordList = {};
 
 module.exports.glossary = {};

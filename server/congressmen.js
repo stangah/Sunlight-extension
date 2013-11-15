@@ -3,6 +3,7 @@ var request = require('request'),
     storage = require('./storage.js'),
     url = "http://congress.api.sunlightfoundation.com/legislators?apikey=" + config.SUNLIGHT_API;
 
+// Populated word list with names of Congressmen to search for
 module.exports.populate = function() {
   request(url + '&per_page=all', function(err, res, body) {
     if (!err && res.statusCode == 200) {
@@ -20,6 +21,7 @@ module.exports.populate = function() {
   });
 };
 
+// Retrieves info about a congressmen via their bioguide_id
 module.exports.retrieveByID = function(id, superRes) {
   console.log(id);
   request(url + '&bioguide_id=' + id, function(err, res, body) {
