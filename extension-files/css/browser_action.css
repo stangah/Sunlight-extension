@@ -38,7 +38,7 @@ ul.nav-tabs {
 }
 
 a.btn-full-text {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .italic {
@@ -68,9 +68,22 @@ ul.infoList {
   color: blue;
 }
 
+.bill-progress {
+  margin-top: 15px;
+}
+
+.bill-status {
+}
+
+.progress {
+  width: 250px;
+  float: right;
+}
+
 .source {
   font-size: .8em;
   margin-top: 5px;
+  clear: both;
 }
 
 .mugshot {

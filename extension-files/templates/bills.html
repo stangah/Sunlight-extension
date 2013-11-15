@@ -14,6 +14,18 @@
 
       <div><span class="italic">{{match.bill_id}}</span>: {{match.official_title}}</div>
 
+      <!-- <div class="bill-status">Status: {{match.status}}</div> -->
+
+      <div class="bill-progress">
+        <span>Bill Progress:</span>
+        <div class="progress">
+          <div class="bar bar-danger" style="width: 25%;"></div>
+          <div ng-show="match.progress > 1" class="bar bar-warning" style="width: 25%;"></div>
+          <div ng-show="match.progress > 2" class="bar bar-info" style="width: 25%;"></div>
+          <div ng-show="match.progress > 3" class="bar bar-success" style="width: 25%;"></div>
+        </div>
+      </div>
+
       <div class="source">
         <span>Find out more:</span>
         <a href="{{match.urls.congress}}" target="_blank">congress.gov</a> |

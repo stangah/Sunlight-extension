@@ -82,6 +82,7 @@ angular.module('sunExt', ['ui.bootstrap'])
           break;
         case 'bills':
           data.bill_id = data.bill_id.toUpperCase();
+          billProgressEval(data);
           break;
       }
 
@@ -116,3 +117,30 @@ angular.module('sunExt', ['ui.bootstrap'])
     templateUrl: "templates/congressmen.html"
   };
 });
+
+
+var billProgressEval = function(data) {
+  data.progress = 1;
+
+  if (data.history.enacted) {
+    data.progress = 4;
+    data.status = "Enacted";
+  };
+
+  if (data.history.house_passage_result === 'pass') {
+    data.progress++;
+  } else {
+    data.status = "Waiting on House passage";
+  }
+
+  if (data.history.senate_passage_result === 'pass') {
+    data.progress++;
+  } else {
+    if (data.status === 2) {
+      data.status = "Waiting on Senate passage";
+    } else {
+      data.status = "Waiting on Passage in both houses.";
+    }
+  }
+
+};

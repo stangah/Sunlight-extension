@@ -10,7 +10,7 @@ module.exports.retrieve = function(id, superRes) {
       var responseData = JSON.parse(body).results[0];
       // console.log(JSON.parse(body).results);
       superRes.send(JSON.stringify(responseData));
-      // console.log(responseData);
+      console.log(responseData);
     }
   });
 };
