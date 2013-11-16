@@ -1,13 +1,13 @@
 {
   "name": "Info-extension",
   "version": "0.0.1",
-  "description": "",
+  "description": "A Chrome extension using APIs from Sunlight Foundation that scans a webpage to give the user more information about legislation, Congressional key terms, and current Congressmen.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Patrick Stanger",
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "~3.4.4",
