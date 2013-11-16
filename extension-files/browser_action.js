@@ -1,12 +1,12 @@
 // Proper case-ness
-String.prototype.toProperCase = function () {
-    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+var toProperCase = function (string) {
+    return string.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
 
 
 // Angular goodness
 angular.module('sunExt', ['ui.bootstrap'])
-.config(['$compileProvider', '$routeProvider', '$locationProvider', function($compileProvider, $routeProvider, $locationProvider) {
+.config(['$compileProvider', '$locationProvider', function($compileProvider, $locationProvider) {
 
   //Some chrome extension poppycock
   $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
@@ -44,13 +44,13 @@ angular.module('sunExt', ['ui.bootstrap'])
       if (req.method === 'bg.matches') {
         $log.log('received!');
         $scope.matches = req.data;
-        // console.log(req.data);
         $scope.populate();
       }
     });
 
     $scope.populate = function() {
       var matches = $scope.matches;
+
       for(var key in matches) {
         $scope.request(key, matches);
       }
@@ -58,7 +58,7 @@ angular.module('sunExt', ['ui.bootstrap'])
 
     $scope.request = function(key, matches) {
       var url = 'http://localhost:8080/' + matches[key].type + '/' + matches[key].id;
-      console.log(url);
+
       $http({
         method: 'GET',
         url: url
@@ -75,10 +75,10 @@ angular.module('sunExt', ['ui.bootstrap'])
       //Data adjustments
       switch (type) {
         case 'glossary':
-          data.name = data.name.toProperCase();
+          data.name = toProperCase(data.name);
           break;
         case 'congressmen':
-          if (data.state_rank) { data.state_rank = data.state_rank.toProperCase(); }
+          if (data.state_rank) { data.state_rank = toProperCase(data.state_rank); }
           break;
         case 'bills':
           data.bill_id = data.bill_id.toUpperCase();
@@ -87,18 +87,11 @@ angular.module('sunExt', ['ui.bootstrap'])
       }
 
       $scope[type].matches[key] = data;
-      // console.log(type, data);
     };
 
     $scope.getMatches();
 
 }])
-// .directive('searchDirective', function() {
-//   return {
-//     restrict: "EAC",
-//     templateUrl: "templates/search.html"
-//   };
-// })
 .directive('glossaryDirective', function() {
   return {
     restrict: "EAC",
@@ -119,13 +112,14 @@ angular.module('sunExt', ['ui.bootstrap'])
 });
 
 
+// Creates data used in building progress bar
 var billProgressEval = function(data) {
   data.progress = 1;
 
   if (data.history.enacted) {
     data.progress = 4;
     data.status = "Enacted";
-  };
+  }
 
   if (data.history.house_passage_result === 'pass') {
     data.progress++;

@@ -1,31 +1,23 @@
 var background = {};
 
+background.list = {};
+
 background._updateWordList = function() {
-  console.log('grabbing word list');
   $.get("http://localhost:8080/list", function(data) {
     data = JSON.parse(data);
-    // console.log(data);
     dataLowerCase = {};
     for(var key in data) {
       dataLowerCase[key.toLowerCase()] = data[key];
     }
-    // chrome.storage.sync.set({
-    //   'list': JSON.stringify(dataLowerCase)
-    // });
-    window.list = dataLowerCase;
+    background.list = dataLowerCase;
   });
 };
 
 
 background._addListeners = function() {
   chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
-    switch(req.method) {
-
-      case 'page.sendText':
-      // console.log('matching!');
-        background.matchNSend(req.data);
-        break;
-
+    if (req.method === 'page.sendText') {
+      background.matchNSend(req.data);
     }
   });
 };
@@ -36,10 +28,9 @@ background.matchNSend = function(string) {
       pattern,
       matchNames,
       matches = {};
-  // console.log(list);
 
-  //Format regex string with | between terms
-  for (var key in list) {
+  //Formats regex string with | between terms
+  for (var key in background.list) {
     if (patternString === '') {
       patternString += key;
     } else {
@@ -47,18 +38,17 @@ background.matchNSend = function(string) {
     }
   }
 
-  //Search for matches and store unique entries
+  //Searches for matches and stores unique entries
   pattern = new RegExp(patternString, 'gi');
   matchNames = _.uniq(string.match(pattern), false, function(item) {
     return item.toLowerCase();
   });
 
-  // Change all keys to be lowercase for simplified lookup
+  // Changes all keys to be lowercase for simplified lookup
   for (var i = 0; i < matchNames.length; i++) {
-    matches[matchNames[i]] = list[matchNames[i].toLowerCase()];
+    matches[matchNames[i]] = background.list[matchNames[i].toLowerCase()];
   }
 
-  // console.log(matches);
   background.sendMatches(matches);
 };
 
@@ -78,4 +68,3 @@ background.initialize = function() {
 };
 
 background.initialize();
-console.log('background checking in!');
