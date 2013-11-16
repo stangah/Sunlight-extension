@@ -7,6 +7,7 @@ var express = require('express'),
     bills = require('./server/bills.js'),
     congressmen = require('./server/congressmen.js'),
     app = express();
+    port = process.env.PORT || 8080;
 
 // Initializes node-localstorage
 if (typeof localStorage === "undefined" || localStorage === null) {
@@ -26,48 +27,44 @@ app.get('/refresh', function(req, res){
   glossary.populate();
   congressmen.populate();
 
-  // Ugly, but it works
+  // Delays storage of data in local storage until responses have returned
   setTimeout(function() {
     localStorage.setItem('wordList', JSON.stringify(storage.wordList));
     localStorage.setItem('glossary', JSON.stringify(storage.glossary));
     localStorage.setItem('nicknames', JSON.stringify(storage.nicknames));
     localStorage.setItem('congressmen', JSON.stringify(storage.congressmen));
     console.log('saved');
-  }, 7000);
+  }, 10000);
 
-  res.send();
+  res.send(200);
 });
 
 app.get('/list', function(req, res){
-  res.send(JSON.stringify(storage.wordList));
+  res.json(200, storage.wordList);
 });
 
 app.get('/bills/:id', function(req, res){
   var id = req.params.id;
-
   bills.retrieve(id, res);
 });
 
 app.get('/glossary/:word', function(req, res){
   var word = req.params.word.toLowerCase();
 
-  res.send(JSON.stringify({
+  res.json(200, {
     name: word,
     def: storage.glossary[word]
-  }));
-  // console.log(storage.glossary[word]);
+  });
 });
 
 app.get('/congressmen/:id', function(req, res){
   var id = req.params.id;
-
   congressmen.retrieveByID(id, res);
 });
 
 app.get('/congressmen/img/:id', function(req, res){
   var id = req.params.id;
-
-  res.send(fs.readFileSync(__dirname+'/server/assets/pics/' + id + ".jpg"));
+  res.send(200, fs.readFileSync(__dirname+'/server/assets/pics/' + id + ".jpg"));
 });
 
-app.listen(8080);
+app.listen(port);

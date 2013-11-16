@@ -10,8 +10,7 @@ module.exports.retrieve = function(id, superRes) {
     if (!err && res.statusCode == 200) {
       var responseData = JSON.parse(body).results[0];
 
-      superRes.send(JSON.stringify(responseData));
-      // console.log(responseData);
+      superRes.json(200, responseData);
     }
   });
 };

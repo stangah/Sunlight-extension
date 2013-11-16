@@ -7,9 +7,7 @@ var request = require('request'),
 // Populates word list with terms to search for
 module.exports.populate = function() {
   request('https://raw.github.com/unitedstates/bill-nicknames/master/bill-nicknames.csv?access_token=' + config.GITHUB_API, function(err, res, body) {
-
     if (!err && res.statusCode == 200) { csvParse(body); }
-
   });
 };
 

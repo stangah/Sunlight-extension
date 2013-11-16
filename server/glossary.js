@@ -8,18 +8,15 @@ module.exports.populate = function() {
   var words = [];
 
   request('https://api.github.com/repos/unitedstates/glossary/contents/definitions/congress?ref=gh-pages&access_token=' + config.GITHUB_API, function(err, res, body) {
-
     if (!err && res.statusCode == 200) {
       body = JSON.parse(body);
       for (var i = 0; i < body.length; i++) {
         words.push(body[i].name);
       }
-      // console.log(words);
 
       for (i = 0; i < words.length; i++) {
         getDef(words[i]);
       }
-
     }
   });
 };
@@ -46,6 +43,5 @@ var getDef = function(word) {
       type: 'glossary',
       id: newDef.name
     };
-
   });
 };
