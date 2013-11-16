@@ -8,28 +8,19 @@ var express = require('express'),
     congressmen = require('./server/congressmen.js'),
     app = express();
 
-// Initialize node-localstorage
+// Initializes node-localstorage
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
 }
 
-// Initialize from localStorage if available
+// Populates data from localStorage if available
 storage.wordList = JSON.parse(localStorage.getItem('wordList')) || {};
 storage.glossary = JSON.parse(localStorage.getItem('glossary')) || {};
 storage.nicknames = JSON.parse(localStorage.getItem('nicknames')) || {};
 storage.congressmen = JSON.parse(localStorage.getItem('congressmen')) || {};
 
-app.get('/', function(req, res){
-  res.send('hello world');
-});
-
-// app.get('/test', function(req, res) {
-//   bills.retrieve(req.params.id);
-//   congressmen.populate();
-// });
-
-//Manual refresh of list
+//Manually refreshes list
 app.get('/refresh', function(req, res){
   nicknames.populate();
   glossary.populate();
@@ -53,11 +44,13 @@ app.get('/list', function(req, res){
 
 app.get('/bills/:id', function(req, res){
   var id = req.params.id;
+
   bills.retrieve(id, res);
 });
 
 app.get('/glossary/:word', function(req, res){
   var word = req.params.word.toLowerCase();
+
   res.send(JSON.stringify({
     name: word,
     def: storage.glossary[word]
@@ -67,12 +60,13 @@ app.get('/glossary/:word', function(req, res){
 
 app.get('/congressmen/:id', function(req, res){
   var id = req.params.id;
+
   congressmen.retrieveByID(id, res);
 });
 
 app.get('/congressmen/img/:id', function(req, res){
   var id = req.params.id;
-  // console.log("Serving picture!");
+
   res.send(fs.readFileSync(__dirname+'/server/assets/pics/' + id + ".jpg"));
 });
 

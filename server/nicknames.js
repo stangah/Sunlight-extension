@@ -4,12 +4,12 @@ var request = require('request'),
     config = require('./config.json');
 
 
-// Populate word list with terms to search for
+// Populates word list with terms to search for
 module.exports.populate = function() {
   request('https://raw.github.com/unitedstates/bill-nicknames/master/bill-nicknames.csv?access_token=' + config.GITHUB_API, function(err, res, body) {
-    if (!err && res.statusCode == 200) {
-      csvParse(body);
-    }
+
+    if (!err && res.statusCode == 200) { csvParse(body); }
+
   });
 };
 
@@ -18,8 +18,6 @@ var csvParse = function(csvIn) {
   csv()
   .from.string(csvIn)
   .to.array(function(data) {
-    // console.log(data);
-    // console.log(arrayToObj(data, 3));
     arrayToObj(data, 3);
   });
 };

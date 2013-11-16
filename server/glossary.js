@@ -6,7 +6,9 @@ var request = require('request'),
 // Grabs word list and sends words to getDef for definitions
 module.exports.populate = function() {
   var words = [];
+
   request('https://api.github.com/repos/unitedstates/glossary/contents/definitions/congress?ref=gh-pages&access_token=' + config.GITHUB_API, function(err, res, body) {
+
     if (!err && res.statusCode == 200) {
       body = JSON.parse(body);
       for (var i = 0; i < body.length; i++) {
@@ -28,6 +30,8 @@ var getDef = function(word) {
 
   request(glossaryURL + word, function(err, res, def) {
     var newDef;
+
+    // Parses data and construct new object
     def = JSON.parse(def);
     newDef = {
       name: word.split('.')[0].toLowerCase(),
@@ -36,7 +40,7 @@ var getDef = function(word) {
       sourceURL: def.source_url
     };
 
-    // Save in glossary storage and wordList
+    // Saves in glossary storage and wordList
     storage.glossary[newDef.name] = newDef;
     storage.wordList[newDef.name] = {
       type: 'glossary',
