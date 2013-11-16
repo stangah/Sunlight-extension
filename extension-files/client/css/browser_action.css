@@ -5,15 +5,14 @@
 body {
   width: 400px;
   height: 300px;
-  /*background-image: url('../images/bg.jpg');*/
-  background-image: url('../images/cream_dust.png');
+  background-image: url('../../images/cream_dust.png');
   color: rgb(98,95,92);
   font-family: Verdana, Geneva, sans-serif;
   padding: 0;
 }
 
 .accordion {
-  padding-top: 0px;
+  padding-top: 0;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -25,11 +24,10 @@ body {
 }
 
 .active > a{
-  background-image: url('../images/cream_dust.png');
+  background-image: url('../../images/cream_dust.png');
 }
 
-ul.nav-tabs {
-  /*background-image: url('../images/bg.jpg');*/
+.nav-tabs {
   background-color: #EEE
 }
 
@@ -70,9 +68,6 @@ ul.infoList {
 
 .bill-progress {
   margin-top: 15px;
-}
-
-.bill-status {
 }
 
 .progress {

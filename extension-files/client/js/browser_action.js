@@ -33,7 +33,6 @@ angular.module('sunExt', ['ui.bootstrap'])
 
     // Kicks off the whole process by requesting text from the DOM
     $scope.getMatches = function() {
-      $log.log('querying!');
       chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { greeting: 'gimme' });
       });
@@ -42,7 +41,6 @@ angular.module('sunExt', ['ui.bootstrap'])
     // Listens for matches from background.js
     chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
       if (req.method === 'bg.matches') {
-        $log.log('received!');
         $scope.matches = req.data;
         $scope.populate();
       }
@@ -95,19 +93,19 @@ angular.module('sunExt', ['ui.bootstrap'])
 .directive('glossaryDirective', function() {
   return {
     restrict: "EAC",
-    templateUrl: "templates/glossary.html"
+    templateUrl: "client/templates/glossary.html"
   };
 })
 .directive('billsDirective', function() {
   return {
     restrict: "EAC",
-    templateUrl: "templates/bills.html"
+    templateUrl: "client/templates/bills.html"
   };
 })
 .directive('congressmenDirective', function() {
   return {
     restrict: "EAC",
-    templateUrl: "templates/congressmen.html"
+    templateUrl: "client/templates/congressmen.html"
   };
 });
 

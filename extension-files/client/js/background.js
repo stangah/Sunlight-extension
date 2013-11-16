@@ -4,12 +4,12 @@ background.list = {};
 
 background._updateWordList = function() {
   $.get("http://localhost:8080/list", function(data) {
-    data = JSON.parse(data);
     dataLowerCase = {};
     for(var key in data) {
       dataLowerCase[key.toLowerCase()] = data[key];
     }
     background.list = dataLowerCase;
+    console.log(background.list);
   });
 };
 

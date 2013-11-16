@@ -15,6 +15,8 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   localStorage = new LocalStorage('./scratch');
 }
 
+!localStorage.getItem('wordList') && refreshData();
+
 // Populates data from localStorage if available
 storage.wordList = JSON.parse(localStorage.getItem('wordList')) || {};
 storage.glossary = JSON.parse(localStorage.getItem('glossary')) || {};
@@ -23,19 +25,7 @@ storage.congressmen = JSON.parse(localStorage.getItem('congressmen')) || {};
 
 //Manually refreshes list
 app.get('/refresh', function(req, res){
-  nicknames.populate();
-  glossary.populate();
-  congressmen.populate();
-
-  // Delays storage of data in local storage until responses have returned
-  setTimeout(function() {
-    localStorage.setItem('wordList', JSON.stringify(storage.wordList));
-    localStorage.setItem('glossary', JSON.stringify(storage.glossary));
-    localStorage.setItem('nicknames', JSON.stringify(storage.nicknames));
-    localStorage.setItem('congressmen', JSON.stringify(storage.congressmen));
-    console.log('saved');
-  }, 10000);
-
+  refreshData();
   res.send(200);
 });
 
@@ -64,7 +54,22 @@ app.get('/congressmen/:id', function(req, res){
 
 app.get('/congressmen/img/:id', function(req, res){
   var id = req.params.id;
-  res.send(200, fs.readFileSync(__dirname+'/server/assets/pics/' + id + ".jpg"));
+  res.send(200, fs.readFileSync(__dirname+'/assets/pics/' + id + ".jpg"));
 });
+
+var refreshData = function() {
+  nicknames.populate();
+  glossary.populate();
+  congressmen.populate();
+
+  // Delays storage of data in local storage until responses have returned
+  setTimeout(function() {
+    localStorage.setItem('wordList', JSON.stringify(storage.wordList));
+    localStorage.setItem('glossary', JSON.stringify(storage.glossary));
+    localStorage.setItem('nicknames', JSON.stringify(storage.nicknames));
+    localStorage.setItem('congressmen', JSON.stringify(storage.congressmen));
+    console.log('saved');
+  }, 10000);
+};
 
 app.listen(port);

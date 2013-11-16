@@ -15,18 +15,18 @@
 
   "background": {
     "persistent": false,
-    "scripts": ["./bower_components/underscore/underscore.js", "./bower_components/jquery/jquery.js", "background.js"]
+    "scripts": ["./bower_components/underscore/underscore.js", "./bower_components/jquery/jquery.js", "./client/js/background.js"]
   },
 
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["pageReader.js"]
+      "js": ["./client/js/pageReader.js"]
     }
   ],
 
  "browser_action": {
-    "default_icon": "images/favicon.png",
+    "default_icon": "./images/favicon.png",
     "default_popup": "browser_action.html"
   }
 }
