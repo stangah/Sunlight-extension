@@ -1,7 +1,6 @@
 var request = require('request'),
-    config = require('./config.json'),
     storage = require('./storage.js'),
-    url = "http://congress.api.sunlightfoundation.com/legislators?apikey=" + config.SUNLIGHT_API;
+    url = "http://congress.api.sunlightfoundation.com/legislators?apikey=" + process.env.SUNLIGHT_API;
 
 // Populates word list with names of Congressmen to search for
 module.exports.populate = function() {

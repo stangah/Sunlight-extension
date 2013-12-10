@@ -1,6 +1,5 @@
 var express = require('express'),
     fs = require('fs'),
-    config = require('./server/config.json'),
     nicknames = require('./server/nicknames.js'),
     glossary = require('./server/glossary.js'),
     storage = require('./server/storage.js'),
@@ -71,5 +70,9 @@ var refreshData = function() {
     console.log('saved');
   }, 10000);
 };
+
+setInterval(function() {
+  refreshData();
+}, 86400000);
 
 app.listen(port);
