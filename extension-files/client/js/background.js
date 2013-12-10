@@ -1,6 +1,7 @@
 var background = {};
 
 background.list = {};
+background.tabMatches = {};
 
 background._updateWordList = function() {
   $.get("http://localhost:8080/list", function(data) {
@@ -9,7 +10,6 @@ background._updateWordList = function() {
       dataLowerCase[key.toLowerCase()] = data[key];
     }
     background.list = dataLowerCase;
-    console.log(background.list);
   });
 };
 
@@ -17,17 +17,42 @@ background._updateWordList = function() {
 background._addListeners = function() {
   chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
     if (req.method === 'page.sendText') {
-      background.matchNSend(req.data);
+      background.matchNStore(req.data, sender.tab.id);
+    } else if (req.method === 'ba.requestMatches') {
+      background.sendCurrentTab();
     }
   });
+
+  // Update the badge with the number of matches
+  chrome.tabs.onHighlighted.addListener(function(obj) {
+    background.updateBadge(obj.tabIds[0]);
+  });
+
 };
 
+// Update icon badge which displays number of matches to the user
+background.updateBadge = function(ID) {
+  if (background.tabMatches[ID] && background.tabMatches[ID].size > 0) {
+    chrome.browserAction.setBadgeText({
+      text: background.tabMatches[ID].size.toString()
+    });
 
-background.matchNSend = function(string) {
+    //Set the background color of the badge
+    chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+  } else {
+    chrome.browserAction.setBadgeText({
+      text: ''
+    });
+  }
+};
+
+// Testing for alternate data routing
+background.matchNStore = function(string, tabID) {
   var patternString = '',
       pattern,
       matchNames,
-      matches = {};
+      matches = {},
+      sizeMatches = 0;
 
   //Formats regex string with | between terms
   for (var key in background.list) {
@@ -47,9 +72,21 @@ background.matchNSend = function(string) {
   // Changes all keys to be lowercase for simplified lookup
   for (var i = 0; i < matchNames.length; i++) {
     matches[matchNames[i]] = background.list[matchNames[i].toLowerCase()];
+    sizeMatches++;
   }
 
-  background.sendMatches(matches);
+  background.tabMatches[tabID] = {};
+  background.tabMatches[tabID].matches = matches;
+  background.tabMatches[tabID].size = sizeMatches;
+  background.updateBadge(tabID);
+};
+
+background.sendCurrentTab = function() {
+
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    background.sendMatches(background.tabMatches[tabs[0].id].matches);
+  });
+
 };
 
 
