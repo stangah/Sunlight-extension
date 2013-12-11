@@ -7,12 +7,15 @@
 
       <accordion-heading>
         <i ng-class="{true : 'icon-chevron-down', false : 'icon-chevron-right'}[!!section1.isOpen]"></i>
-        {{match.short_title}}
+        <span ng-bind="match.short_title"></span>
       </accordion-heading>
 
-      <a class="btn btn-info btn-mini btn-full-text" href="{{match.last_version.urls.pdf}}" target="_blank">Full Text</a>
+      <a class="btn btn-info btn-mini btn-full-text" ng-href="{{match.last_version.urls.pdf}}" target="_blank">Full Text</a>
 
-      <div><span class="italic">{{match.bill_id}}</span>: {{match.official_title}}</div>
+      <div>
+        <span class="italic"><span ng-bind="match.bill_id"></span></span>:
+        <span ng-bind="match.official_title"></span>
+      </div>
 
       <!-- <div class="bill-status">Status: {{match.status}}</div> -->
 
@@ -28,9 +31,9 @@
 
       <div class="source">
         <span>Find out more:</span>
-        <a href="{{match.urls.congress}}" target="_blank">congress.gov</a> |
-        <a href="{{match.urls.govtrack}}" target="_blank">GovTrack.us</a> |
-        <a href="{{match.urls.opencongress}}" target="_blank">opencongress.org</a>
+        <a ng-href="{{match.urls.congress}}" target="_blank">congress.gov</a> |
+        <a ng-href="{{match.urls.govtrack}}" target="_blank">GovTrack.us</a> |
+        <a ng-href="{{match.urls.opencongress}}" target="_blank">opencongress.org</a>
       </div>
 
   </accordion-group>

@@ -6,21 +6,27 @@
 
     <accordion-heading>
       <i ng-class="{true : 'icon-chevron-down', false : 'icon-chevron-right'}[!!section1.isOpen]"></i>
-      {{match.first_name}} {{match.last_name}} ({{match.party}})
+      <span ng-bind="match.first_name"></span>
+      <span ng-bind="match.last_name"></span>
+      (<span ng-bind="match.party"></span>)
     </accordion-heading>
 
     <img class="mugshot img-rounded" ng-src="http://hr-ps-sunlight-extension.azurewebsites.net/congressmen/img/{{match.bioguide_id}}">
 
-    <span class="name-congress">{{match.state_rank}} {{match.chamber == 'senate' && "Senator" || "Representative"}} {{match.first_name}} {{match.last_name}}</span>
+    <span class="name-congress">
+      <span ng-bind="match.state_rank"></span>
+      <span ng-bind="match.chamber == 'senate' && 'Senator' || 'Representative'"></span>
+      <span ng-bind="match.first_name"></span> <span ng-bind="match.last_name"></span>
+    </span>
     <ul class="infoList">
-      <li>State: {{match.state_name}}</li>
-      <li ng-show="match.chamber != 'senate'">District: {{match.district}}</li>
+      <li>State: <span ng-bind="match.state_name"></span></li>
+      <li ng-show="match.chamber != 'senate'">District: <span ng-bind="match.district"></span></li>
       <li></li>
     </ul>
 
-    <a href="{{match.website}}" target="_blank" class="btn btn-info btn-mini btn-congress"><i class="icon-globe"></i> | Official Site</a>
-    <a href="http://www.facebook.com/profile.php?id={{match.facebook_id}}" target="_blank" class="btn btn-facebook btn-mini btn-congress"><i class="icon-facebook"></i> | Facebook</a>
-    <a href="http://www.twitter.com/{{match.twitter_id}}" target="_blank" class="btn btn-twitter btn-mini btn-congress"><i class="icon-twitter"></i> | Twitter</a>
+    <a ng-href="{{match.website}}" target="_blank" class="btn btn-info btn-mini btn-congress"><i class="icon-globe"></i> | Official Site</a>
+    <a ng-href="http://www.facebook.com/profile.php?id={{match.facebook_id}}" target="_blank" class="btn btn-facebook btn-mini btn-congress"><i class="icon-facebook"></i> | Facebook</a>
+    <a ng-href="http://www.twitter.com/{{match.twitter_id}}" target="_blank" class="btn btn-twitter btn-mini btn-congress"><i class="icon-twitter"></i> | Twitter</a>
 
   </accordion-group>
 </accordion>
