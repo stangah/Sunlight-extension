@@ -9,3 +9,5 @@ module.exports.bills = {};
 module.exports.nicknames = {};
 
 module.exports.congressmen = {};
+
+module.exports.congressmenInfo = {};

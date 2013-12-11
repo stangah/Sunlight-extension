@@ -14,6 +14,7 @@ module.exports.populate = function() {
           type: 'congressmen',
           id: results[i].bioguide_id
         };
+        // this.retrieveByID(results[i].bioguide_id);
       }
     }
   });
@@ -21,11 +22,21 @@ module.exports.populate = function() {
 
 // Retrieves info about a congressmen via their bioguide_id
 module.exports.retrieveByID = function(id, superRes) {
-  request(url + '&bioguide_id=' + id, function(err, res, body) {
-    if (!err && res.statusCode == 200) {
-      var results = JSON.parse(body).results;
-      superRes.json(200, results[0]);
-    }
-  });
+
+  if (storage.congressmenInfo[id]) {
+    superRes.json(200, storage.congressmenInfo[id]);
+  } else {
+
+    request(url + '&bioguide_id=' + id, function(err, res, body) {
+      if (!err && res.statusCode == 200) {
+        var results = JSON.parse(body).results;
+        storage.congressmenInfo[id] = results[0];
+        if (superRes) {
+          superRes.json(200, results[0]);
+        }
+      }
+    });
+
+  }
 
 };

@@ -14,11 +14,12 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   localStorage = new LocalStorage('./scratch');
 }
 
-// Populates data from localStorage if available
-storage.wordList = JSON.parse(localStorage.getItem('wordList')) || {};
-storage.glossary = JSON.parse(localStorage.getItem('glossary')) || {};
-storage.nicknames = JSON.parse(localStorage.getItem('nicknames')) || {};
-storage.congressmen = JSON.parse(localStorage.getItem('congressmen')) || {};
+// // Populates data from localStorage if available
+// storage.wordList = JSON.parse(localStorage.getItem('wordList')) || {};
+// storage.glossary = JSON.parse(localStorage.getItem('glossary')) || {};
+// storage.nicknames = JSON.parse(localStorage.getItem('nicknames')) || {};
+// storage.congressmen = JSON.parse(localStorage.getItem('congressmen')) || {};
+// storage.congressmenInfo = JSON.parse(localStorage.getItem('congressmenInfo')) || {};
 
 //Manually refreshes list
 app.get('/refresh', function(req, res){
@@ -59,21 +60,21 @@ var refreshData = function() {
   nicknames.populate();
   glossary.populate();
   congressmen.populate();
+  storage.congressmenInfo = {};
 
-  // Delays storage of data in local storage until responses have returned
-  setTimeout(function() {
-    localStorage.setItem('wordList', JSON.stringify(storage.wordList));
-    localStorage.setItem('glossary', JSON.stringify(storage.glossary));
-    localStorage.setItem('nicknames', JSON.stringify(storage.nicknames));
-    localStorage.setItem('congressmen', JSON.stringify(storage.congressmen));
-    console.log('saved');
-  }, 10000);
+  // // Delays storage of data in local storage until responses have returned
+  // setTimeout(function() {
+  //   localStorage.setItem('wordList', JSON.stringify(storage.wordList));
+  //   localStorage.setItem('glossary', JSON.stringify(storage.glossary));
+  //   localStorage.setItem('nicknames', JSON.stringify(storage.nicknames));
+  //   localStorage.setItem('congressmen', JSON.stringify(storage.congressmen));
+  // }, 10000);
 };
 
+refreshData();
 setInterval(function() {
   refreshData();
 }, 86400000);
-
 
 
 app.listen(port);
