@@ -8,8 +8,6 @@ var express = require('express'),
     app = express();
     port = process.env.PORT || 8080;
 
-    // No config.json!!!!!!
-
 // Initializes node-localstorage
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
