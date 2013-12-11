@@ -4,7 +4,7 @@ background.list = {};
 background.tabMatches = {};
 
 background._updateWordList = function() {
-  $.get("http://localhost:8080/list", function(data) {
+  $.get("http://hr-ps-sunlight-extension.azurewebsites.net/list", function(data) {
     dataLowerCase = {};
     for(var key in data) {
       dataLowerCase[key.toLowerCase()] = data[key];
