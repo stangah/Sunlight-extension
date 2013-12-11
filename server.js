@@ -14,8 +14,6 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   localStorage = new LocalStorage('./scratch');
 }
 
-!localStorage.getItem('wordList') && refreshData();
-
 // Populates data from localStorage if available
 storage.wordList = JSON.parse(localStorage.getItem('wordList')) || {};
 storage.glossary = JSON.parse(localStorage.getItem('glossary')) || {};
@@ -74,5 +72,7 @@ var refreshData = function() {
 setInterval(function() {
   refreshData();
 }, 86400000);
+
+!localStorage.getItem('wordList') && refreshData();
 
 app.listen(port);
