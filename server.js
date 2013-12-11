@@ -52,7 +52,7 @@ app.get('/congressmen/:id', function(req, res){
 app.get('/congressmen/img/:id', function(req, res){
   var id = req.params.id;
   res.status(200);
-  fs.createReadStresm(__dirname+'/assets/pics/' + id + ".jpg").pipe(res);
+  fs.createReadStream(__dirname+'/assets/pics/' + id + ".jpg").pipe(res);
 });
 
 var refreshData = function() {
