@@ -57,7 +57,7 @@ angular.module('sunExt', ['ui.bootstrap'])
     };
 
     $scope.request = function(key, matches) {
-      var url = 'http://localhost:8080/' + matches[key].type + '/' + matches[key].id;
+      var url = 'http://hr-ps-sunlight-extension.azurewebsites.net/' + matches[key].type + '/' + matches[key].id;
       console.log(url);
       $http({
         method: 'GET',
