@@ -9,6 +9,7 @@ module.exports.populate = function() {
   request('https://api.github.com/repos/unitedstates/glossary/contents/definitions/congress?ref=gh-pages', function(err, res, body) {
     if (!err && res.statusCode == 200) {
       body = JSON.parse(body);
+      console.log(body);
       for (var i = 0; i < body.length; i++) {
         words.push(body[i].name);
       }
