@@ -5,11 +5,16 @@ var request = require('request'),
 // Grabs word list and sends words to getDef for definitions
 module.exports.populate = function() {
   var words = [];
+  var options = {
+    url: 'https://api.github.com/repos/unitedstates/glossary/contents/definitions/congress?ref=gh-pages',
+    headers: {
+      'User-Agent': 'Sunlight_info_ext'
+    }
+  };
 
-  request('https://api.github.com/repos/unitedstates/glossary/contents/definitions/congress?ref=gh-pages', function(err, res, body) {
+  request(options, function(err, res, body) {
     if (!err && res.statusCode == 200) {
       body = JSON.parse(body);
-      console.log(body);
       for (var i = 0; i < body.length; i++) {
         words.push(body[i].name);
       }
