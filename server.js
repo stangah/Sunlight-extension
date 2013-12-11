@@ -51,7 +51,7 @@ app.get('/congressmen/:id', function(req, res){
 
 app.get('/congressmen/img/:id', function(req, res){
   var id = req.params.id;
-  res.send(200, fs.readFileSync(__dirname+'/assets/pics/' + id + ".jpg"));
+  res.status(200).sendfile('./assets/pics/' + id + ".jpg"));
 });
 
 var refreshData = function() {
