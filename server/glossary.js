@@ -15,6 +15,7 @@ module.exports.populate = function() {
 
       for (i = 0; i < words.length; i++) {
         getDef(words[i]);
+        console.log(words[i]);
       }
     }
   });
