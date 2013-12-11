@@ -14,7 +14,7 @@ module.exports.populate = function() {
           type: 'congressmen',
           id: results[i].bioguide_id
         };
-        this.retrieveByID(results[i].bioguide_id);
+        module.exports.retrieveByID(results[i].bioguide_id);
       }
     }
   });
