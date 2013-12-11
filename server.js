@@ -51,7 +51,8 @@ app.get('/congressmen/:id', function(req, res){
 
 app.get('/congressmen/img/:id', function(req, res){
   var id = req.params.id;
-  res.status(200).sendfile('./assets/pics/' + id + ".jpg");
+  res.status(200);
+  fs.createReadStresm(__dirname+'/assets/pics/' + id + ".jpg").pipe(res);
 });
 
 var refreshData = function() {
@@ -73,6 +74,6 @@ setInterval(function() {
   refreshData();
 }, 86400000);
 
-!localStorage.getItem('wordList') && refreshData();
+
 
 app.listen(port);
