@@ -9,7 +9,7 @@
       {{match.first_name}} {{match.last_name}} ({{match.party}})
     </accordion-heading>
 
-    <img class="mugshot img-rounded" src="http://hr-ps-sunlight-extension.azurewebsites.net/congressmen/img/{{match.bioguide_id}}">
+    <img class="mugshot img-rounded" ng-src="http://hr-ps-sunlight-extension.azurewebsites.net/congressmen/img/{{match.bioguide_id}}">
 
     <span class="name-congress">{{match.state_rank}} {{match.chamber == 'senate' && "Senator" || "Representative"}} {{match.first_name}} {{match.last_name}}</span>
     <ul class="infoList">
