@@ -6,7 +6,7 @@ A Chrome extension using APIs from [Sunlight Foundation](http://sunlightfoundati
 
 ### Through the Chrome Extension Store
 
-Head over to the hosted extension [at this broken link](http://lolImBroken) and follow the install instructions. 
+Head over to the hosted extension [this link](https://chrome.google.com/webstore/detail/sunlight-lookup/bpdfaelcagglgkkoeokpffoejnlpheek) and follow the install instructions. 
 
 ### From Github
 
