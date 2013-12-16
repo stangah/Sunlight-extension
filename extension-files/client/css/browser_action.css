@@ -48,11 +48,6 @@ a.btn-full-text {
   font-weight: bold;
 }
 
-.greyed {
-  color: #CCC;
-  font-size: 0.9em;
-}
-
 ul.infoList {
   list-style-type: none;
   padding: 0;
@@ -67,18 +62,60 @@ ul.infoList {
 }
 
 .bill-progress {
-  margin-top: 15px;
+  margin-top: 10px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .progress {
-  width: 250px;
-  float: right;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px
+}
+
+.progress-labels {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.9em;
+  font-weight: bold;
+  width: 350px;
+  text-align: center;
+  margin-top: -20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.progress-labels td {
+  width: 25%;
+}
+
+td.greyed {
+  color: #AAA;
+  font-weight: normal;
 }
 
 .source {
   font-size: .8em;
-  margin-top: 5px;
-  clear: both;
+  margin-top: 0px;
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.source td {
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  padding: 0;
+}
+
+.source td:first-child {
+  border-left: none;
+}
+
+.source td:last-child {
+  border-right: none;
 }
 
 .mugshot {
