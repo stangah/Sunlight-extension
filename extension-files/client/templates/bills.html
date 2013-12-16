@@ -10,9 +10,9 @@
         <span ng-bind="match.short_title"></span>
       </accordion-heading>
 
-      <a class="btn btn-info btn-mini btn-full-text" ng-href="{{match.last_version.urls.pdf}}" target="_blank">Full Text</a>
+      <!-- <a class="btn btn-info btn-mini btn-full-text" ng-href="{{match.last_version.urls.pdf}}" target="_blank">Full Text</a> -->
 
-      <div>
+      <div class="bill-description">
         <span class="italic"><span ng-bind="match.bill_id"></span></span>:
         <span ng-bind="match.official_title"></span>
       </div>
@@ -20,21 +20,38 @@
       <!-- <div class="bill-status">Status: {{match.status}}</div> -->
 
       <div class="bill-progress">
-        <span>Bill Progress:</span>
         <div class="progress">
           <div class="bar bar-danger" style="width: 25%;"></div>
           <div ng-show="match.progress > 1" class="bar bar-warning" style="width: 25%;"></div>
           <div ng-show="match.progress > 2" class="bar bar-info" style="width: 25%;"></div>
           <div ng-show="match.progress > 3" class="bar bar-success" style="width: 25%;"></div>
         </div>
+
+        <table class="progress-labels">
+          <tr>
+            <td>Introduced</td>
+
+            <td ng-show="match.status.senate" ng-class="{greyed: match.status.senate == false}">Senate</td>
+            <td ng-show="match.status.senate" ng-class="{greyed: match.status.house == false}">House</td>
+
+            <td ng-show="!match.status.senate" ng-class="{greyed: match.status.house == false}">House</td>
+            <td ng-show="!match.status.senate" ng-class="{greyed: match.status.senate == false}">Senate</td>
+
+            <td ng-class="{greyed: match.status.signed == false}">Signed</td>
+          </tr>
+        </table>
       </div>
 
-      <div class="source">
-        <span>Find out more:</span>
-        <a ng-href="{{match.urls.congress}}" target="_blank">congress.gov</a> |
-        <a ng-href="{{match.urls.govtrack}}" target="_blank">GovTrack.us</a> |
-        <a ng-href="{{match.urls.opencongress}}" target="_blank">opencongress.org</a>
-      </div>
+      <hr class="lineBreak">
+
+      <table class="source">
+        <tr>
+          <td><a ng-href="{{match.last_version.urls.pdf}}" target="_blank">Full Text</a></td>
+          <td><a ng-href="{{match.urls.congress}}" target="_blank">congress.gov</a></td>
+          <td><a ng-href="{{match.urls.govtrack}}" target="_blank">GovTrack.us</a></td>
+          <td><a ng-href="{{match.urls.opencongress}}" target="_blank">opencongress.org</a></td>
+        </tr>
+      </table>
 
   </accordion-group>
 </accordion>
