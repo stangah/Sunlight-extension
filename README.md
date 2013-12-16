@@ -6,7 +6,7 @@ A Chrome extension using APIs from [Sunlight Foundation](http://sunlightfoundati
 
 ### Through the Chrome Extension Store
 
-Head over to the hosted extension [at this broken link](http://lolImBroken) and follow the install instructions. 
+Head over to the hosted extension [this link](https://chrome.google.com/webstore/detail/sunlight-lookup/bpdfaelcagglgkkoeokpffoejnlpheek) and follow the install instructions. 
 
 ### From Github
 
@@ -23,14 +23,8 @@ node server.js</code></pre>
 
 ## Use
 
-Click on the extension icon in your browser action bar to scan the page and request info from the server. Results will be organized into the provided tabs. Click on each line to access more info.
+Click on the extension icon in your browser action bar to scan the page and request info from the server. Results will be organized into the provided tabs. Click on each term to access more info.
 
 ## Contribute
 
 Contributing to this repo is an easy way to become my friend.
-
-## License
-
-Sunlight-extension is distributed under the [license that I haven't decided on yet](http://lolNoLicenseYet).
-
-
