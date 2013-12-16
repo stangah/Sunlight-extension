@@ -8,7 +8,7 @@ String.prototype.toProperCase = function () {
 angular.module('sunExt', ['ui.bootstrap'])
 .config(['$compileProvider', '$routeProvider', '$locationProvider', function($compileProvider, $routeProvider, $locationProvider) {
 
-  //Some chrome extension poppycock
+  // Allows Angular to use the chrome-extension protocol
   $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
 
   // I forget what this does but I'll assume it's important
@@ -44,7 +44,6 @@ angular.module('sunExt', ['ui.bootstrap'])
       if (req.method === 'bg.matches') {
         $log.log('received!');
         $scope.matches = req.data;
-        // console.log(req.data);
         $scope.populate();
       }
     });
@@ -86,18 +85,11 @@ angular.module('sunExt', ['ui.bootstrap'])
       }
 
       $scope[type].matches[key] = data;
-      // console.log(type, data);
     };
 
     $scope.getMatches();
 
 }])
-// .directive('searchDirective', function() {
-//   return {
-//     restrict: "EAC",
-//     templateUrl: "templates/search.html"
-//   };
-// })
 .directive('glossaryDirective', function() {
   return {
     restrict: "EAC",
