@@ -8,7 +8,7 @@ var toProperCase = function (string) {
 angular.module('sunExt', ['ui.bootstrap'])
 .config(['$compileProvider', '$locationProvider', function($compileProvider, $locationProvider) {
 
-  //Some chrome extension poppycock
+  // Allows angular to recognize chrome-extension protocol
   $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
 
   // I forget what this does but I'll assume it's important
@@ -111,25 +111,33 @@ angular.module('sunExt', ['ui.bootstrap'])
 // Creates data used in building progress bar
 var billProgressEval = function(data) {
   data.progress = 1;
+  data.status = {
+    house: true,
+    senate: true,
+    signed: true
+  };
 
   if (data.history.enacted) {
     data.progress = 4;
-    data.status = "Enacted";
   }
 
   if (data.history.house_passage_result === 'pass') {
     data.progress++;
   } else {
-    data.status = "Waiting on House passage";
+    data.status.house = false;
+    data.status.signed = false;
   }
 
   if (data.history.senate_passage_result === 'pass') {
     data.progress++;
   } else {
-    if (data.status === 2) {
-      data.status = "Waiting on Senate passage";
+    if (data.progress === 2) {
+      data.status.senate = false;
+      data.status.signed = false;
     } else {
-      data.status = "Waiting on Passage in both houses.";
+      data.status.house = false;
+      data.status.senate = false;
+      data.status.signed = false;
     }
   }
 

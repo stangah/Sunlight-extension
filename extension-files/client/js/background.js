@@ -32,6 +32,7 @@ background._addListeners = function() {
 
 // Update icon badge which displays number of matches to the user
 background.updateBadge = function(ID) {
+  console.log(ID, background.tabMatches[ID]);
   if (background.tabMatches[ID] && background.tabMatches[ID].size > 0) {
     chrome.browserAction.setBadgeText({
       text: background.tabMatches[ID].size.toString()
