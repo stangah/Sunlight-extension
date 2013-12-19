@@ -2,7 +2,7 @@
  "manifest_version": 2,
  "name": "Sunlight Lookup",
  "description": "Scans current page and returns more information about related government/political topics",
- "version": "1.0",
+ "version": "1.0.1",
 
  "permissions": [
     "contextMenus",
