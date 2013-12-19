@@ -119,6 +119,12 @@ td.greyed {
   border-right: none;
 }
 
+.sourceGlossary {
+  font-size: .8em;
+  margin-top: 5px;
+  clear: both;
+}
+
 .mugshot {
   width: 75px;
   float: left;
